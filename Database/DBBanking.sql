@@ -5,7 +5,7 @@ CREATE TABLE CustomerTypes
 (
     CustomerTypesCode varchar(15) NOT NULL PRIMARY KEY,
     CustomerTypesName varchar(40) NOT NULL,
-    CustomerTypesDescription varchar(255),
+    CustomerTypesDescription varchar(255)
 );
 
 -- Customers table
@@ -20,5 +20,25 @@ CREATE TABLE Customers
 	UserName varchar(32) NOT NULL,
 	Password varchar(32) NOT NULL,
 	CustomerTypesCode varchar(15) NOT NULL FOREIGN KEY REFERENCES CustomerTypes(CustomerTypesCode)
+);
+
+-- AccountTypes table
+CREATE TABLE AccountTypes 
+(
+    AccountTypesCode varchar(15) NOT NULL PRIMARY KEY,
+    AccountTypesName varchar(40) NOT NULL,
+    AccountTypesDescription varchar(255)
+);
+
+-- Accounts table
+CREATE TABLE Accounts 
+(
+    AccountID int NOT NULL PRIMARY KEY,
+    AccountName varchar(50) NOT NULL,
+    DateOpened date NOT NULL,
+	Balance int NOT NULL,
+	AccountStatus varchar(10),
+	CustomerID int NOT NULL FOREIGN KEY REFERENCES Customers(CustomerID),
+	AccountTypesCode varchar(15) NOT NULL FOREIGN KEY REFERENCES AccountTypes(AccountTypesCode)
 );
 

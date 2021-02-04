@@ -42,3 +42,21 @@ CREATE TABLE Accounts
 	AccountTypesCode varchar(15) NOT NULL FOREIGN KEY REFERENCES AccountTypes(AccountTypesCode)
 );
 
+-- TransactionTypes table
+CREATE TABLE TransactionTypes
+(
+    TransactionTypesCode varchar(15) NOT NULL PRIMARY KEY,
+    TransactionTypesName varchar(40) NOT NULL,
+    AccountTypesDescription varchar(255)
+);
+
+-- Transactions table
+CREATE TABLE Transactions
+(
+    TransactionID int NOT NULL PRIMARY KEY,
+    DateTransaction date NOT NULL,
+	AmountOfTransaction int NOT NULL,
+	OtherDetails varchar(255),
+	AccountID int NOT NULL FOREIGN KEY REFERENCES Accounts(AccountID),
+	TransactionTypesCode varchar(15) NOT NULL FOREIGN KEY REFERENCES TransactionTypes(TransactionTypesCode)
+);
